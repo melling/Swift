@@ -9,6 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+/*
+   Need to use a container as described here:
+    
+    http://stackoverflow.com/questions/29923061/trying-to-curl-up-curl-down-with-two-views-using-autolayout-in-swift?noredirect=1#comment47975892_29923061
+    
+    http://stackoverflow.com/questions/9524048/how-to-flip-an-individual-uiview-without-flipping-the-parent-view
+    
+*/
+    var container:UIView! // Place cardFront/cardBack in this container
 
     var cardFront:UIView!
     var cardBack:UIView!
@@ -23,15 +32,15 @@ class ViewController: UIViewController {
         
     }
     
-    func addStandardConstraints(aConstraint:String, viewDictionary:Dictionary<String,UIView!>, metrics:Dictionary<String, Int>) {
+    func addStandardConstraints(view:UIView, constraint:String, viewDictionary:Dictionary<String,UIView!>, metrics:Dictionary<String, Int>) {
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(aConstraint, options: nil, metrics: metrics, views: viewDictionary))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(constraint, options: nil, metrics: metrics, views: viewDictionary))
         
     }
     
     func curlUp() {
         let transitionOptions = UIViewAnimationOptions.TransitionCurlUp
-                
+        
         UIView.transitionFromView(cardFront,
             toView: cardBack,
             duration: 5.0,
@@ -53,38 +62,38 @@ class ViewController: UIViewController {
     }
     
     func buildView() {
+
+        let height = 100
+        let width = 100
+
+        container = UIView()
+        container.setTranslatesAutoresizingMaskIntoConstraints(false)
+        container.backgroundColor = UIColor.blackColor()
+        self.view.addSubview(container)
         
-        cardBack = UIView()
+        cardBack = UIView(frame: CGRectMake(0, 0, CGFloat(width), CGFloat(height)))
         cardBack.setTranslatesAutoresizingMaskIntoConstraints(false)
         cardBack.backgroundColor = UIColor.redColor()
-        self.view.addSubview(cardBack)
+        container.addSubview(cardBack)
         
-        cardFront = UIView()
+        cardFront = UIView(frame: CGRectMake(0, 0, CGFloat(width), CGFloat(height)))
         cardFront.setTranslatesAutoresizingMaskIntoConstraints(false)
         cardFront.backgroundColor = UIColor.greenColor()
-        self.view.addSubview(cardFront)
+        container.addSubview(cardFront)
         
-        let height = 50
-        let width = 50
-        
-        let viewDictionary:Dictionary<String,UIView> = ["cardFront": cardFront, "cardBack": cardBack]
+
+//        let viewDictionary:Dictionary<String,UIView> = ["container": container, "cardFront": cardFront, "cardBack": cardBack]
+        let viewDictionary:Dictionary<String,UIView> = ["container": container]
 
         let metrics:Dictionary<String,Int> = ["width": width, "height": height]
-        let hConstraint = "H:[cardFront(==width)]"
-        let vConstraint = "V:[cardFront(==height)]"
+
+        let h0Constraint = "H:[container(==width)]"
+        let v0Constraint = "V:[container(==height)]"
         
-        addStandardConstraints(hConstraint, viewDictionary: viewDictionary, metrics: metrics)
-        addStandardConstraints(vConstraint, viewDictionary: viewDictionary, metrics: metrics)
-
-        centerViewXY(self.view, child: cardFront)
-
-        let h1Constraint = "H:[cardBack(==width)]"
-        let v1Constraint = "V:[cardBack(==height)]"
-
-        addStandardConstraints(h1Constraint, viewDictionary: viewDictionary, metrics: metrics)
-        addStandardConstraints(v1Constraint, viewDictionary: viewDictionary, metrics: metrics)
-
-        centerViewXY(self.view, child: cardBack)
+        addStandardConstraints(self.view, constraint: h0Constraint, viewDictionary: viewDictionary, metrics: metrics)
+        addStandardConstraints(self.view, constraint: v0Constraint, viewDictionary: viewDictionary, metrics: metrics)
+        
+        centerViewXY(self.view, child: container)
         
         NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "curlUp", userInfo: nil, repeats: false)
         
