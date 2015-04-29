@@ -82,7 +82,6 @@ class ViewController: UIViewController {
         container.addSubview(cardFront)
         
 
-//        let viewDictionary:Dictionary<String,UIView> = ["container": container, "cardFront": cardFront, "cardBack": cardBack]
         let viewDictionary:Dictionary<String,UIView> = ["container": container]
 
         let metrics:Dictionary<String,Int> = ["width": width, "height": height]
