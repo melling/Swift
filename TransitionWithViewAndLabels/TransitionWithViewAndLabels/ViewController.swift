@@ -61,10 +61,32 @@ class ViewController: UIViewController {
         
     }
     
+    func addLabelToCardBack() {
+        let height = 40
+        let width = 100
+        
+        let label = UILabel(frame: CGRectMake(20, 20, 100, 40))
+//        label.backgroundColor = UIColor.clearColor()
+        label.textColor = UIColor.orangeColor()
+        label.setTranslatesAutoresizingMaskIntoConstraints(false)
+        cardBack.addSubview(label)
+        
+        let h0Constraint = "H:[label(==width)]"
+        let v0Constraint = "V:[label(==height)]"
+        let metrics:Dictionary<String,Int> = ["width": width, "height": height]
+        let viewDictionary:Dictionary<String,UIView> = ["label": label]
+
+        addStandardConstraints(cardBack, constraint: h0Constraint, viewDictionary: viewDictionary, metrics: metrics)
+        addStandardConstraints(cardBack, constraint: v0Constraint, viewDictionary: viewDictionary, metrics: metrics)
+        
+        centerViewXY(cardBack, child: label)
+        label.text = "Hello World"
+    }
+    
     func buildView() {
         
-        let height = 100
-        let width = 100
+        let height = 200
+        let width = 200
         
         container = UIView()
         container.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -72,14 +94,19 @@ class ViewController: UIViewController {
         self.view.addSubview(container)
         
         cardBack = UIView(frame: CGRectMake(0, 0, CGFloat(width), CGFloat(height)))
-        cardBack.setTranslatesAutoresizingMaskIntoConstraints(false)
+        // WARNING: Accidently leave this set and you'll be in for a little hurt when you add the uilabel with autolayout
+//        cardBack.setTranslatesAutoresizingMaskIntoConstraints(false)
         cardBack.backgroundColor = UIColor.redColor()
         container.addSubview(cardBack)
+        cardBack.layer.borderWidth = 2
+        cardBack.layer.borderColor = UIColor.blackColor().CGColor
         
         cardFront = UIView(frame: CGRectMake(0, 0, CGFloat(width), CGFloat(height)))
-        cardFront.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        cardFront.setTranslatesAutoresizingMaskIntoConstraints(false)
         cardFront.backgroundColor = UIColor.greenColor()
         container.addSubview(cardFront)
+        cardFront.layer.borderWidth = 2
+        cardFront.layer.borderColor = UIColor.blackColor().CGColor
         
         
         let viewDictionary:Dictionary<String,UIView> = ["container": container]
@@ -93,6 +120,8 @@ class ViewController: UIViewController {
         addStandardConstraints(self.view, constraint: v0Constraint, viewDictionary: viewDictionary, metrics: metrics)
         
         centerViewXY(self.view, child: container)
+        
+        addLabelToCardBack()
         
         NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "curlUp", userInfo: nil, repeats: false)
         
