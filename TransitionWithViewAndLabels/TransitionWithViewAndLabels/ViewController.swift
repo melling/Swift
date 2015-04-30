@@ -65,9 +65,9 @@ class ViewController: UIViewController {
         let height = 40
         let width = 100
         
-        let label = UILabel(frame: CGRectMake(20, 20, 100, 40))
-//        label.backgroundColor = UIColor.clearColor()
-        label.textColor = UIColor.orangeColor()
+        let label = UILabel()
+
+        label.textColor = UIColor.blackColor()
         label.setTranslatesAutoresizingMaskIntoConstraints(false)
         cardBack.addSubview(label)
         
