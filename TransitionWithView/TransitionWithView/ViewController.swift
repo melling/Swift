@@ -72,12 +72,10 @@ class ViewController: UIViewController {
         self.view.addSubview(container)
         
         cardBack = UIView(frame: CGRectMake(0, 0, CGFloat(width), CGFloat(height)))
-        cardBack.setTranslatesAutoresizingMaskIntoConstraints(false)
         cardBack.backgroundColor = UIColor.redColor()
         container.addSubview(cardBack)
         
         cardFront = UIView(frame: CGRectMake(0, 0, CGFloat(width), CGFloat(height)))
-        cardFront.setTranslatesAutoresizingMaskIntoConstraints(false)
         cardFront.backgroundColor = UIColor.greenColor()
         container.addSubview(cardFront)
         
