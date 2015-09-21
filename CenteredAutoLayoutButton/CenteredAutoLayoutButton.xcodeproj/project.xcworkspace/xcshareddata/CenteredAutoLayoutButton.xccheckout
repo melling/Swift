@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>588F1256-6D11-4A91-9AB2-1FE82EC3E1F8</string>
 	<key>IDESourceControlProjectName</key>
-	<string>CenteredAutoLayoutButton</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>41AB125E18A9B1C432DD8467A5A5BCF477957FF6</key>
 		<string>github.com:melling/swift.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>CenteredAutoLayoutButton/CenteredAutoLayoutButton.xcodeproj</string>
+	<string>CenteredAutoLayoutButton/CenteredAutoLayoutButton.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>41AB125E18A9B1C432DD8467A5A5BCF477957FF6</key>

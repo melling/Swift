@@ -24,17 +24,17 @@ class ViewController: UIViewController {
     
     func centerViewXY(parent: UIView, child: UIView) {
         
-        var constX = NSLayoutConstraint(item: child, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: parent, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let constX = NSLayoutConstraint(item: child, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: parent, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         parent.addConstraint(constX)
         
-        var constY = NSLayoutConstraint(item: child, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: parent, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        let constY = NSLayoutConstraint(item: child, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: parent, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
         parent.addConstraint(constY)
         
     }
     
     func addStandardConstraints(view:UIView, constraint:String, viewDictionary:Dictionary<String,UIView!>, metrics:Dictionary<String, Int>) {
         
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(constraint, options: nil, metrics: metrics, views: viewDictionary))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(constraint, options: [], metrics: metrics, views: viewDictionary))
         
     }
     
@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         let width = 100
 
         container = UIView()
-        container.setTranslatesAutoresizingMaskIntoConstraints(false)
+        container.translatesAutoresizingMaskIntoConstraints = false
         container.backgroundColor = UIColor.blackColor()
         self.view.addSubview(container)
         
